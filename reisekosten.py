@@ -5,15 +5,19 @@ from geopy.geocoders import Nominatim
 import streamlit as st
 
 @st.cache_data
-def reisekosten_rechnen(startort, zielort) -> float:
+def reisekosten_rechnen(startort, zielort, dienstort) -> float:
     '''
     Berechnet die Reisekosten von Startort zu Zielort.
     startort: str, Startort
-    zielort: str, Zielort
+    zielort: str, Zielort: Dort findet die Veranstaltung statt
+    dienstort: str, Dienstort
     return: float, Reisekosten
     '''
     # Entfernung berechnen
-    distance = get_road_distance(startort, zielort)
+    if zielort == dienstort:
+        distance = 0
+    else:
+        distance = get_road_distance(startort, zielort)
     kosten = distance * 0.3
     return round(kosten, 0), distance
 

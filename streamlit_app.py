@@ -28,7 +28,7 @@ st.markdown("### Kostenkalkulation")
 st.write("Heimatort: " + dozenten[dozenten["Name"] == dozent]["heimatort"].values[0])
 
 # Gesamtkosten berechnen
-gesamtkosten = gesamtkosten_errechnen(dozenten[dozenten["Name"] == dozent]["heimatort"].values[0])
+gesamtkosten = gesamtkosten_errechnen(dozenten[dozenten["Name"] == dozent]["heimatort"].values[0], dozenten[dozenten["Name"] == dozent]["dienstort"].values[0] )
 st.write(gesamtkosten)
 minimum = float(gesamtkosten["Gesamtkosten"].min())
 bester_standort=gesamtkosten[gesamtkosten["Gesamtkosten"] == minimum]["Veranstaltungsort"].values[0]

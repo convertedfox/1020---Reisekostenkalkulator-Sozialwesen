@@ -5,7 +5,7 @@ from reisekosten import reisekosten_rechnen
 from übernachtungskosten import übernachtungskosten_berechnen
 
 @st.cache_data
-def gesamtkosten_errechnen(startort) -> pd.DataFrame:
+def gesamtkosten_errechnen(startort, dienstort) -> pd.DataFrame:
     '''
     Diese Funktion geht errechnet für einen Dozenten und seinen Startort ein Dataframe mit allen Kosten, die für jeden Standort anfallen.
     '''
@@ -16,7 +16,7 @@ def gesamtkosten_errechnen(startort) -> pd.DataFrame:
     ergebnisse = []
     
     for standort in standorte["name"]:
-        reisekosten, distanz = reisekosten_rechnen(startort, standort)
+        reisekosten, distanz = reisekosten_rechnen(startort, standort, dienstort)
         # print(startort, standort, reisekosten)
         übernachtungskosten = übernachtungskosten_berechnen(distanz, 3)
         mietkosten = standorte[standorte["name"] == standort]["raummiete_pro_tag"].values
